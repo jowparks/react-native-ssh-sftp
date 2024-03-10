@@ -15,7 +15,7 @@ int uploadedPerc = 0;
 
 - (instancetype)init {
     if ((self = [super init])) {
-        _session = [[NMSSHSession alloc] init];
+        _session = [[NMSSHSession alloc] initWithHost:@"192.168.1.15" andUsername:@"root"];
         _sftpSession = [[NMSFTP alloc] init];
         _key = [[NSString alloc] init];
         _downloadContinue = false;
