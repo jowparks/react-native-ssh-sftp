@@ -90,15 +90,16 @@ export default class SSHClient {
    * @param port - The port number of the SSH server.
    * @param username - The username for authentication.
    * @param privateKey - The private key for authentication.
+   * @param publicKey - The corresponding public key for authentication (optional).
    * @param passphrase - The passphrase for the private key (optional).
    * @param callback - A callback function to handle the connection result (optional).
    *
    * @returns A Promise that resolves to an instance of SSHClient if the connection is successful.
    *          Otherwise, it rejects with an error.
    */
-  static connectWithKey(host: string, port: number, username: string, privateKey: string, passphrase?: string, callback?: CallbackFunction<SSHClient>): Promise<SSHClient> {
+  static connectWithKey(host: string, port: number, username: string, privateKey: string, publicKey?: string, passphrase?: string, callback?: CallbackFunction<SSHClient>): Promise<SSHClient> {
     return new Promise((resolve, reject) => {
-      const result = new SSHClient(host, port, username, { privateKey, passphrase }, (error: CBError) => {
+      const result = new SSHClient(host, port, username, { privateKey, publicKey, passphrase }, (error: CBError) => {
         if (callback) {
           callback(error);
         }
